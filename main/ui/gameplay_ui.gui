@@ -1,0 +1,113 @@
+script: "/main/ui/gameplay_ui.gui_script"
+fonts {
+  name: "game_font"
+  font: "/assets/fonts/oswald.font"
+}
+textures {
+  name: "for_click_button"
+  texture: "/assets/images/for_click_button.atlas"
+}
+nodes {
+  position {
+    x: 512.0
+    y: 300.0
+  }
+  size {
+    x: 100.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  texture: "for_click_button/g_27"
+  id: "button_herb"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 512.0
+    y: 420.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_TEXT
+  text: "Herbs: 0"
+  font: "game_font"
+  id: "text_herbs"
+  shadow {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 256.0
+    y: 300.0
+  }
+  size {
+    x: 100.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  texture: "for_click_button/m_15"
+  id: "button_mushroom"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 256.0
+    y: 420.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_TEXT
+  text: "Mushrooms: 0"
+  font: "game_font"
+  id: "text_mushrooms"
+  shadow {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 768.0
+    y: 300.0
+  }
+  size {
+    x: 100.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  texture: "for_click_button/f_14"
+  id: "button_flower"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 768.0
+    y: 420.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_TEXT
+  text: "Flowers: 0"
+  font: "game_font"
+  id: "text_flowers"
+  shadow {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+  inherit_alpha: true
+}
+material: "/builtins/materials/gui.material"
+adjust_reference: ADJUST_REFERENCE_PARENT

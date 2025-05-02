@@ -1,0 +1,10 @@
+name: "main"
+scale_along_z: 0
+embedded_instances {
+  id: "gameplay_ui"
+  data: "components {\n"
+  "  id: \"gameplay_ui\"\n"
+  "  component: \"/main/ui/gameplay_ui.gui\"\n"
+  "}\n"
+  ""
+}

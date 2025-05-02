@@ -1,0 +1,42 @@
+local click = require('assets.modules.click_functions')
+
+function init(self)
+	msg.post("#", "acquire_input_focus")
+
+	-- gui nodes list
+	self.button_clickable_object = gui.get_node("button_clickable_object")
+	self.text_current_score = gui.get_node("text_current_score")
+
+end
+
+function final(self)
+end
+
+function update(self, dt)
+	gui.set_text(self.text_current_score, click.get_current_score())
+end
+
+function on_message(self, message_id, message, sender)
+end
+
+function click_on_resourse(self, action_id, action)
+	if action_id == hash("mouse_button_left") and action.pressed and gui.pick_node(self.button_clickable_object, action.x, action.y) then
+		if click.button_animate == false then
+			click.button_animate = true
+			gui.animate(self.button_clickable_object, 'scale', 0.5, gui.PLAYBACK_ONCE_PINGPONG, 0.2, 0,
+				function()
+					gui.animate(self.button_clickable_object, 'scale', 1, gui.PLAYBACK_ONCE_PINGPONG, 0.2, 0,
+					function()
+						click.button_animate = false
+					end
+				)
+				end
+			)
+		end
+		click.click_made()
+	end
+end
+
+function on_input(self, action_id, action)
+	click_on_resourse(self, action_id, action)
+end

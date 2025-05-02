@@ -1,0 +1,23 @@
+[bootstrap]
+main_collection = /main/main.collectionc
+
+[script]
+shared_state = 1
+
+[display]
+width = 1600
+height = 900
+high_dpi = 1
+
+[android]
+input_method = HiddenInputField
+
+[html5]
+scale_mode = stretch
+
+[project]
+title = potion_clicker
+
+[input]
+game_binding = /assets/input/all_input_for_game.input_bindingc
+
