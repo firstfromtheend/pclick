@@ -4,8 +4,17 @@ function init(self)
 	msg.post("#", "acquire_input_focus")
 
 	-- gui nodes list
-	self.button_clickable_object = gui.get_node("button_clickable_object")
-	self.text_current_score = gui.get_node("text_current_score")
+	self.buttons = {
+		mushroom = gui.get_node("button_mushroom"),
+		herbs = gui.get_node("button_herb"),
+		flower = gui.get_node("button_flower")
+	}
+
+	self.scores = {
+		mushroom = gui.get_node("text_mushrooms"),
+		herbs = gui.get_node("text_herbs"),
+		flower = gui.get_node("text_flowers")
+	}
 
 end
 
@@ -13,27 +22,44 @@ function final(self)
 end
 
 function update(self, dt)
-	gui.set_text(self.text_current_score, click.get_current_score())
+	local temp_score_table = click.get_current_score()
+	gui.set_text(self.scores.mushroom, temp_score_table['mushroom'])
+	gui.set_text(self.scores.herbs, temp_score_table['herbs'])
+	gui.set_text(self.scores.flower, temp_score_table['flower'])
 end
 
 function on_message(self, message_id, message, sender)
 end
 
-function click_on_resourse(self, action_id, action)
-	if action_id == hash("mouse_button_left") and action.pressed and gui.pick_node(self.button_clickable_object, action.x, action.y) then
-		if click.button_animate == false then
-			click.button_animate = true
-			gui.animate(self.button_clickable_object, 'scale', 0.5, gui.PLAYBACK_ONCE_PINGPONG, 0.2, 0,
+function animate_node_by_click(node, animate_node_data)
+	if click.button_animate[animate_node_data] == false then
+		click.button_animate[animate_node_data] = true
+		gui.animate(node, 'scale', 0.5, gui.PLAYBACK_ONCE_PINGPONG, 0.2, 0,
+			function()
+				gui.animate(node, 'scale', 1, gui.PLAYBACK_ONCE_PINGPONG, 0.2, 0,
 				function()
-					gui.animate(self.button_clickable_object, 'scale', 1, gui.PLAYBACK_ONCE_PINGPONG, 0.2, 0,
-					function()
-						click.button_animate = false
-					end
-				)
+					click.button_animate[animate_node_data] = false
 				end
 			)
+			end
+		)
+	end
+end
+
+function click_on_resourse(self, action_id, action)
+	if action_id == hash("mouse_button_left") and action.pressed then
+		if gui.pick_node(self.buttons.mushroom, action.x, action.y)  then
+		animate_node_by_click(self.buttons.mushroom, 'mushroom')
+		click.add_point('mushroom')
+
+		elseif gui.pick_node(self.buttons.herbs, action.x, action.y)  then
+			animate_node_by_click(self.buttons.herbs, 'herbs')
+			click.add_point('herbs')
+
+		elseif gui.pick_node(self.buttons.flower, action.x, action.y)  then
+			animate_node_by_click(self.buttons.flower, 'flower')
+			click.add_point('flower')
 		end
-		click.click_made()
 	end
 end
 
